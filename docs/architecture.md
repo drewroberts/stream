@@ -51,5 +51,9 @@ The core mechanism is the **symbolic link**.
 
 -   **Atomicity & Auditability:** Every configuration change becomes a Git commit. You can see exactly what changed, revert to a previous state, or even branch your configuration to test new ideas without affecting your main setup.
 -   **Portability & Disaster Recovery:** Your entire streaming identity is contained within this repository. Restoring your setup on a new machine is as simple as `git clone` and `./setup.sh`.
--   **Idempotency:** The `setup.sh` script is designed to be safe. It checks if the symlinks already exist before trying to create them, so you can run it anytime to verify your setup is correct.
--   **Separation of Concerns:** The application code (installed via AUR) is separate from your personal configuration (managed by Git).
+-   **Standardized Development:** By convention, all custom OBS browser sources use Tailwind CSS, ensuring a consistent and maintainable approach to on-screen graphics.
+
+---
+
+## The Workflow in Practice
+// ...existing code...

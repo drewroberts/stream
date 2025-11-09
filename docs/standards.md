@@ -37,6 +37,7 @@ This is not just about backing up files; it's about treating personal applicatio
     -   **Root-Level Scripts:** The primary user-facing scripts (`setup.sh`, `sync.sh`) reside at the root.
     -   **Centralized Documentation (`docs/`):** All markdown-based documentation, including this standards guide and the architectural overview, is located in the `docs/` directory.
     -   **Component-Specific Directories:** Each managed application has a top-level directory (`obs/`, `deck/`, `goxlr/`).
+    -   **Browser Sources use Tailwind CSS:** Any custom HTML/CSS/JS developed for OBS browser sources (located in `obs/browser-sources/`) should utilize Tailwind CSS via the CDN for rapid, consistent, and maintainable styling.
     -   **Configuration Targets (`config/`):** Inside each component directory, a `config/` folder serves as the explicit target for the symlink. This avoids ambiguity.
 
 ---
