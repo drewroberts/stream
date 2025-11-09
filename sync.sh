@@ -28,8 +28,14 @@ log() {
 main() {
     log "Starting Configuration Synchronization..."
 
-    # Navigate to the script's directory to ensure we're in the repository root.
-    cd "$(dirname "${BASH_SOURCE[0]}")"
+    # Navigate to the repository root to ensure we're in the right place.
+    local REPO_ROOT="$HOME/Code/stream"
+    if [ ! -d "$REPO_ROOT" ]; then
+        echo -e "\033[1;31mError: Repository not found at $REPO_ROOT\033[0m"
+        echo "Please ensure the project is cloned into your '$HOME/Code' directory."
+        exit 1
+    fi
+    cd "$REPO_ROOT"
     log "Changed directory to repository root: $(pwd)"
 
     # Check for an upstream branch

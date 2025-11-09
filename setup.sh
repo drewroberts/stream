@@ -28,10 +28,14 @@ log() {
 main() {
     log "Starting Stream Configuration Setup..."
 
-    # Ensure the script is run from the repository root
-    cd "$(dirname "${BASH_SOURCE[0]}")"
-    local REPO_ROOT
-    REPO_ROOT=$(pwd)
+    # Set repository root, assuming it's cloned in ~/Code
+    local REPO_ROOT="$HOME/Code/stream"
+    if [ ! -d "$REPO_ROOT" ]; then
+        echo -e "\033[1;31mError: Repository not found at $REPO_ROOT\033[0m"
+        echo "Please ensure the project is cloned into your '$HOME/Code' directory."
+        exit 1
+    fi
+    cd "$REPO_ROOT"
     log "Repository root set to: $REPO_ROOT"
 
     # Step 1: Install required packages

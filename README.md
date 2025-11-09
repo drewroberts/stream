@@ -44,15 +44,16 @@ This repository is managed by two primary scripts.
 
 ### 1. Initial Setup (`setup.sh`)
 
-To configure a new Arch Linux machine, run the `setup.sh` script. This script is idempotent and can be safely run multiple times.
+To configure a new Arch Linux machine, run the `setup.sh` script. This script assumes the repository is cloned into `$HOME/Code/stream`.
 
 ```bash
-# Clone the repository
+# Navigate to your Code directory and clone the repository
+mkdir -p $HOME/Code
+cd $HOME/Code
 git clone https://github.com/drewroberts/stream.git
-cd stream
 
-# Run the setup script
-./setup.sh
+# Run the setup script (can be run from anywhere)
+$HOME/Code/stream/setup.sh
 ```
 
 The script will automatically:
@@ -64,11 +65,11 @@ The script will automatically:
 
 After making changes to your setup (e.g., modifying an OBS scene or a Stream Deck button), run the `sync.sh` script to commit and push all changes to the Git repository.
 
-This can be bound to a hotkey or a Stream Deck button for one-click backups.
+This can be bound to a hotkey or a Stream Deck button for one-click backups. The script can be run from any directory.
 
 ```bash
-# From within the repository directory
-./sync.sh
+# Run the sync script
+$HOME/Code/stream/sync.sh
 ```
 
 The script will automatically add, commit, and push any detected changes in your configuration directories.
