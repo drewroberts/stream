@@ -88,10 +88,7 @@ The script will automatically add, commit, and push any detected changes in your
 ├── setup.sh
 ├── sync.sh
 ├── obs/
-│   ├── browser-sources/
-│   └── config/
+│   └── browser-sources/
 ├── deck/
-│   └── config/
 └── goxlr/
-    └── config/
 ```

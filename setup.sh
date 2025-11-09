@@ -97,9 +97,9 @@ create_symlinks() {
 
     # Define the links: "target_in_repo -> link_in_home"
     declare -A links=(
-        ["$REPO_ROOT/obs/config"]="$HOME/.config/obs-studio"
-        ["$REPO_ROOT/deck/config"]="$HOME/.config/streamdeck-ui"
-        ["$REPO_ROOT/goxlr/config"]="$HOME/.config/goxlr-utility"
+        ["$REPO_ROOT/obs"]="$HOME/.config/obs-studio"
+        ["$REPO_ROOT/deck"]="$HOME/.config/streamdeck-ui"
+        ["$REPO_ROOT/goxlr"]="$HOME/.config/goxlr-utility"
     )
 
     for target in "${!links[@]}"; do
