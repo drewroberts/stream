@@ -1,0 +1,10 @@
+{
+  "daemon_version": "0.7.0",
+  "profile_name": "Default",
+  "mic_profile_name": "SM7B",
+  "show_tray_icon": true,
+  "tts_enabled": false,
+  "allow_network_access": true,
+  "log_level": "Info",
+  "ui_pool_rate": 20
+}
