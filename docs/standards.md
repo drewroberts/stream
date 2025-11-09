@@ -1,61 +1,64 @@
 # Project Standards & Development Philosophy
 
-This document outlines the architectural principles and development standards for projects in this repository. Our core philosophy is **Declarative Automation**: we define the *desired state* of a system in version control and use clean, robust scripts to make reality match that state.
+This document outlines the architectural principles and development standards for the `stream` repository. The core philosophy is **Declarative Automation for Personal Configuration**: we define the *desired state* of the local streaming environment in this version-controlled repository and use clean, robust scripts to make the local machine match that state.
+
+This is not just about backing up files; it's about treating personal application settings as a manageable, recoverable, and auditable codebase.
 
 ---
 
-## 1. Automation is King, Idempotency is the Law
+## 1. The Symlink is the Contract
 
--   **Principle:** Every script must be safely re-runnable without causing errors or unintended side effects. The system should converge to the desired state, regardless of its starting state.
+-   **Principle:** The primary architectural pattern is the symbolic link. The Git repository is the **source of truth**, and the local configuration directories (e.g., `~/.config/obs-studio`) are merely pointers to it.
 
 -   **Implementation:**
-    -   Use `helm upgrade --install` instead of `helm install` for Helm charts.
-    -   Use `kubectl apply -f <file>` instead of `kubectl create` for Kubernetes manifests.
-    -   Check for the existence of resources (files, directories, Kubernetes secrets) before creating them (e.g., `if ! command -v foo &> /dev/null`).
-    -   Where appropriate, use configuration checksums (`sha256sum`) to determine if a resource needs to be updated and a service needs to be restarted.
+    -   The `setup.sh` script is responsible for establishing this contract by creating the necessary symlinks.
+    -   Scripts must never write directly to `~/.config/` paths. They should operate on the repository's directories, and the symlinks ensure the applications see the changes.
+    -   The `sync.sh` script completes the loop, taking changes made by applications (via the symlink) and committing them back to the source of truth.
 
 ---
 
-## 2. Structure is Intentional and Predictable
+## 2. Scripts Must Be Idempotent and Safe
 
--   **Principle:** A repository's layout should be self-explanatory, with a clear separation of concerns that reveals the project's architecture at a glance.
+-   **Principle:** All automation scripts must be safely re-runnable without causing errors or data loss. The `setup.sh` script should be able to run on a fresh install or a fully configured machine and result in the same correct state.
 
 -   **Implementation:**
-    -   **Top-Level Action Scripts:** Core, user-facing executable scripts reside at the root of the repository.
-    -   **Dedicated `docs/` Directory:** All markdown-based documentation is centralized in a `docs/` folder.
-    -   **Configuration Directories:** Component-specific configuration files are grouped into their own directories (e.g., `monitoring/` for `values.yaml`, `k8s/` for manifests).
+    -   **Check, Then Act:** Before creating a symlink, check if a file, directory, or another symlink already exists at the destination.
+    -   **Backup, Don't Destroy:** If an existing configuration is found, it must be backed up with a timestamp (`mv path path.bak.timestamp`) rather than being deleted.
+    -   **Verify Installation:** Check if a package is already installed (`pacman -Q <pkg>`) before attempting to install it.
+    -   **Assume Nothing:** Scripts should not assume they are being run from a specific directory. Hardcode paths (like `$HOME/Code/stream`) to ensure consistent behavior.
 
 ---
 
-## 3. Documentation is a First-Class Citizen
+## 3. Structure is Intentional and Self-Documenting
 
--   **Principle:** Documentation must be comprehensive, clear, and serve specific purposes. It is not an afterthought but an integral part of the deliverable.
+-   **Principle:** The repository's layout is designed to be intuitive, with a clear separation of concerns that reveals the project's purpose at a glance.
 
 -   **Implementation:**
-    -   **`README.md` as the Gateway:** The main `README.md` serves as a high-level introduction and a "Quick Start" guide, linking out to more detailed documents.
-    -   **The "Plan" Document:** A master specification (`plan.md`) defines the high-level architecture, security principles, and operational phases. This acts as the project's constitution.
-    -   **"How-To" Guides:** Specific, task-oriented documents (`expansion.md`, `nfs.md`, `githubci.md`) provide step-by-step instructions for complex operations.
-    -   **Effective Markdown:** Consistently use tables for structured data, code blocks for commands, and blockquotes for important callouts to improve readability.
+    -   **Root-Level Scripts:** The primary user-facing scripts (`setup.sh`, `sync.sh`) reside at the root.
+    -   **Centralized Documentation (`docs/`):** All markdown-based documentation, including this standards guide and the architectural overview, is located in the `docs/` directory.
+    -   **Component-Specific Directories:** Each managed application has a top-level directory (`obs/`, `deck/`, `goxlr/`).
+    -   **Configuration Targets (`config/`):** Inside each component directory, a `config/` folder serves as the explicit target for the symlink. This avoids ambiguity.
 
 ---
 
-## 4. Scripts are Built for Humans
+## 4. Documentation Precedes Implementation
 
--   **Principle:** A script should be easy to understand, use, and debug for anyone (including your future self).
+-   **Principle:** We document the plan, architecture, and usage instructions *before* writing the code. This forces clarity of thought and ensures the final product aligns with the initial goals.
 
 -   **Implementation:**
-    -   **Robust Script Headers:** Always start with `#!/bin/bash` and `set -euo pipefail` to ensure predictable behavior and fail-fast execution.
-    -   **Clear Logging:** Provide verbose, color-coded feedback to the user about what the script is doing (`log`, `error` functions).
-    -   **Modular Functions:** Break down complex scripts into smaller, single-purpose functions with descriptive names (e.g., `prepare_host_system`, `deploy_plg_stack`).
-    -   **Input Validation:** Scripts that require arguments must validate them and provide a clear `usage()` message if they are incorrect.
+    -   **`README.md` as the Gateway:** The main `README.md` provides the high-level "what" and "why," along with a quick-start guide for immediate use.
+    -   **`architecture.md` as the Blueprint:** This document details the "how," explaining the symlink strategy, the role of each script, and the overall workflow. It is the technical constitution of the project.
+    -   **Clarity Through Formatting:** Use Markdown tables, code blocks, and diagrams to make complex information easy to digest.
 
 ---
 
-## 5. Configuration is Data, Not Code
+## 5. Scripts are Built for Humans
 
--   **Principle:** Avoid hardcoding configuration values directly into scripts. Extract them into dedicated, human-readable files to separate logic from data.
+-   **Principle:** A script should be easy for a human to read, understand, and debug.
 
 -   **Implementation:**
-    -   Use Helm `values.yaml` files to manage complex application settings.
-    -   Use simple text files (`pkglist.txt`) as a data source for scripts to read from.
-    -   Use Kubernetes `ConfigMap` objects to manage application environment variables, keeping them separate from the `Deployment` manifest.
+    -   **Strict Mode:** Scripts start with `set -e` to ensure they exit immediately on error, preventing unexpected behavior.
+    -   **Clear Logging:** Use a simple `log()` function to print color-coded, informative messages, showing the user what the script is doing at each step.
+    -   **Modular Functions:** Break down logic into small, single-purpose functions with descriptive names (e.g., `install_packages`, `create_symlinks`).
+    -   **Abundant Comments:** Explain the "why" behind non-obvious commands or configuration choices.
+
