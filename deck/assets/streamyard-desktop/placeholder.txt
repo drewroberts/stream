@@ -1,0 +1,6 @@
+This directory is for organizing assets (icons, images) for your StreamYard-centric Stream Deck.
+
+For example:
+- `mute-mic-icon.png`
+- `show-banner.png`
+- `camera-switch.png`

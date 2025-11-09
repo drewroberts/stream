@@ -1,0 +1,6 @@
+This directory will contain your Stream Deck UI profiles.
+When you create a new profile in the Stream Deck UI application, a .streamdeck file will be created here.
+
+For example:
+- `OBS Control.streamdeck`
+- `StreamYard Control.streamdeck`
