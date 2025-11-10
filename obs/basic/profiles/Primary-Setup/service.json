@@ -10,22 +10,37 @@
         "FPSType": 0,
         "FPSCommon": 60
     },
+    "Stream": {
+        "Bitrate": 6000,
+        "Encoder": "jim_nvenc",
+        "NVENCPreset": 7,
+        "Lookahead": false,
+        "PsychoAQ": true
+    },
     "Output": {
-        "Mode": "Advanced",
-        "RecFormat": "mkv",
-        "RecEncoder": "jim_nvenc"
+        "Mode": "Advanced"
     },
     "AdvOut": {
         "TrackIndex": 1,
         "RecType": "Standard",
-        "RecTracks": 1,
+        "RecTracks": 6,
+        "RecFormat": "mkv",
         "RecEncoder": "jim_nvenc",
         "RecRescale": false,
-        "RecQuality": 23,
-        "RecCQ": 20,
+        "RecCQ": 18,
         "RecMaxBitrate": 0,
         "RecLookahead": false,
         "RecPsychoAQ": true,
-        "NVENCPreset": 7
+        "RecNVENCPreset": 7,
+        "StreamAudioEncoder": "ffmpeg_aac",
+        "StreamAudioBitrate": 160,
+        "RecAudioEncoder": "ffmpeg_aac",
+        "RecAudioBitrate": 192,
+        "AudioTrackName1": "Stream Mix",
+        "AudioTrackName2": "Microphone",
+        "AudioTrackName3": "Gameplay",
+        "AudioTrackName4": "Music",
+        "AudioTrackName5": "Chat",
+        "AudioTrackName6": "System"
     }
 }

@@ -1,0 +1,13 @@
+{
+    "name": "StreamYard Desktop",
+    "layout": [
+        { "row": 0, "col": 0, "action": "command", "data": { "command": "xdotool key 'ctrl+shift+e'" }, "icon": "fas:camera" },
+        { "row": 0, "col": 1, "action": "command", "data": { "command": "xdotool key 'ctrl+shift+a'" }, "icon": "fas:microphone-slash" },
+        { "row": 0, "col": 2, "action": "command", "data": { "command": "xdotool key 'ctrl+shift+s'" }, "icon": "fas:desktop" },
+        { "row": 0, "col": 3, "action": "command", "data": { "command": "xdotool key 'ctrl+shift+b'" }, "icon": "fas:ad" },
+
+        { "row": 1, "col": 0, "action": "command", "data": { "command": "prompter-cli --scroll-up" }, "icon": "fas:arrow-up" },
+        { "row": 1, "col": 1, "action": "command", "data": { "command": "prompter-cli --scroll-down" }, "icon": "fas:arrow-down" },
+        { "row": 1, "col": 2, "action": "command", "data": { "command": "prompter-cli --toggle-mirror" }, "icon": "fas:sync" }
+    ]
+}

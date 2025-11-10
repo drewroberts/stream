@@ -1,40 +1,84 @@
 {
-    "current_scene": "Main Scene",
+    "current_program_scene": "[Live] Main Camera",
+    "current_scene": "[Live] Main Camera",
     "current_transition": "Fade",
     "transition_duration": 300,
-    "groups": [],
-    "quick_transitions": [],
-    "saved_projectors": [],
-    "scaling_enabled": false,
-    "scaling_level": 0,
-    "scaling_off_x": 0.0,
-    "scaling_off_y": 0.0,
     "scene_order": [
-        {
-            "name": "Main Scene"
-        }
+        { "name": "Starting Soon" },
+        { "name": "[Live] Main Camera" },
+        { "name": "[Live] Screen Share + Cam" },
+        { "name": "Be Right Back" },
+        { "name": "Stream Ending" }
     ],
     "sources": [
         {
-            "balance": 0.5,
-            "deinterlace_field_order": 0,
-            "deinterlace_mode": 0,
-            "enabled": true,
-            "flags": 0,
-            "hotkeys": {},
+            "id": "text_ft2_source_v2",
+            "name": "Scene Title",
+            "settings": { "text": "Starting Soon", "font": { "face": "Arial", "size": 72 } }
+        },
+        {
+            "id": "blackmagic_device",
+            "name": "ATEM Mini Pro",
+            "settings": { "device_hash": "ATEM Mini Pro", "mode": "1920x1080 @ 59.94 FPS" }
+        },
+        {
+            "id": "pulse_input_capture",
+            "name": "GoXLR (Mic)",
+            "settings": { "device_id": "alsa_input.pci-0000_0b_00.4.analog-stereo" }
+        },
+        {
+            "id": "pulse_output_capture",
+            "name": "Desktop Audio",
+            "settings": { "device_id": "alsa_output.pci-0000_0b_00.4.analog-stereo.monitor" }
+        },
+        {
+            "id": "xshm_input",
+            "name": "Screen Capture (Primary)",
+            "settings": {}
+        },
+        {
+            "id": "browser_source",
+            "name": "Lower Third",
+            "settings": { "url": "file:///home/drewroberts/Code/stream/obs/browser-sources/lower-third.html", "width": 600, "height": 100 }
+        },
+        {
             "id": "scene",
-            "mixers": 255,
-            "monitoring_type": 0,
-            "muted": false,
-            "name": "Main Scene",
-            "push_to_mute_delay": 0,
-            "push_to_mute_enabled": false,
-            "push_to_talk_delay": 0,
-            "push_to_talk_enabled": false,
-            "settings": {},
-            "sync": 0,
-            "volume": 1.0
+            "name": "Starting Soon",
+            "settings": {
+                "items": [
+                    { "name": "Scene Title", "visible": true, "pos": { "x": 650, "y": 450 } }
+                ]
+            }
+        },
+        {
+            "id": "scene",
+            "name": "[Live] Main Camera",
+            "settings": {
+                "items": [
+                    { "name": "ATEM Mini Pro", "visible": true },
+                    { "name": "Lower Third", "visible": false, "pos": { "x": 20, "y": 950 } }
+                ]
+            }
+        },
+        {
+            "id": "scene",
+            "name": "[Live] Screen Share + Cam",
+            "settings": {
+                "items": [
+                    { "name": "Screen Capture (Primary)", "visible": true },
+                    { "name": "ATEM Mini Pro", "visible": true, "scale": { "x": 0.25, "y": 0.25 }, "pos": { "x": 1420, "y": 790 } }
+                ]
+            }
+        },
+        {
+            "id": "scene",
+            "name": "Be Right Back",
+            "settings": { "items": [{ "name": "Scene Title", "visible": true, "settings": { "text": "Be Right Back" } }] }
+        },
+        {
+            "id": "scene",
+            "name": "Stream Ending",
+            "settings": { "items": [{ "name": "Scene Title", "visible": true, "settings": { "text": "Stream Ending" } }] }
         }
-    ],
-    "transitions": []
+    ]
 }

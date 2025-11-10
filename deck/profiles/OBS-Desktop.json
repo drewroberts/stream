@@ -1,0 +1,15 @@
+{
+    "name": "OBS Desktop",
+    "layout": [
+        { "row": 0, "col": 0, "action": "obs.scene", "data": { "scene": "Starting Soon" }, "icon": "fas:play-circle" },
+        { "row": 0, "col": 1, "action": "obs.scene", "data": { "scene": "[Live] Main Camera" }, "icon": "fas:user" },
+        { "row": 0, "col": 2, "action": "obs.scene", "data": { "scene": "[Live] Screen Share + Cam" }, "icon": "fas:desktop" },
+        { "row": 0, "col": 3, "action": "obs.scene", "data": { "scene": "Be Right Back" }, "icon": "fas:pause-circle" },
+        { "row": 0, "col": 4, "action": "obs.scene", "data": { "scene": "Stream Ending" }, "icon": "fas:stop-circle" },
+
+        { "row": 1, "col": 0, "action": "obs.source.toggle", "data": { "scene": "[Live] Main Camera", "source": "Lower Third" }, "icon": "fas:id-card" },
+
+        { "row": 2, "col": 3, "action": "obs.stream.toggle", "icon": "fas:satellite-dish" },
+        { "row": 2, "col": 4, "action": "obs.record.toggle", "icon": "fas:video" }
+    ]
+}

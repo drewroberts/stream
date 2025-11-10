@@ -2,13 +2,13 @@
   "equalizer": {
     "gain": {
       "90": 0,
-      "125": 0,
-      "250": 0,
+      "125": -2,
+      "250": -3,
       "500": 0,
-      "1000": 0,
-      "2000": 0,
-      "4000": 0,
-      "8000": 0,
+      "1000": 1,
+      "2000": 3,
+      "4000": 4,
+      "8000": 2,
       "16000": 0
     },
     "frequency": {
@@ -27,13 +27,13 @@
     "gain": {
       "31": 0,
       "63": 0,
-      "125": 0,
-      "250": 0,
+      "125": -2,
+      "250": -3,
       "500": 0,
-      "1000": 0,
-      "2000": 0,
-      "4000": 0,
-      "8000": 0,
+      "1000": 1,
+      "2000": 3,
+      "4000": 4,
+      "8000": 2,
       "16000": 0
     },
     "frequency": {
@@ -50,22 +50,22 @@
     }
   },
   "noise_gate": {
-    "threshold": -40,
+    "threshold": -36,
     "attack": 10,
-    "release": 200,
+    "release": 150,
     "attenuation": 100,
     "enabled": true
   },
   "compressor": {
-    "threshold": -18,
+    "threshold": -16,
     "ratio": 4,
     "attack": 2,
     "release": 100,
-    "makeup_gain": 0
+    "makeup_gain": 2
   },
   "mic_type": "Dynamic",
   "mic_gains": {
-    "Dynamic": 60,
+    "Dynamic": 62,
     "Condenser": 30,
     "Jack": 30
   }
